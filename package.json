@@ -4,13 +4,20 @@
   "description": "Design dirigido à dominio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "tsx watch src/server.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "node build/server.js",
+    "lint": "eslint src --ext .ts --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
     "@types/node": "^20.8.6",
-    "typescript": "^5.2.2"
+    "eslint": "^8.51.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   }
 }
