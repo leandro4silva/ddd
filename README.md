@@ -13,3 +13,8 @@ Design dirigido à dominio
 
 - Muita dificuldade em saber as duvidas dos alunos.
 - Eu tenho que responder os alunos e eu me perco em quais duvidas ja foram respondidas.
+
+
+## Value Object
+
+Atributos das entidades que possuem regras de negocio, pode ser validação, formatações ou outras regras.
