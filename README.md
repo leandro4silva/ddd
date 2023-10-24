@@ -18,3 +18,4 @@ Design dirigido à dominio
 ## Value Object
 
 Atributos das entidades que possuem regras de negocio, pode ser validação, formatações ou outras regras.
+
