@@ -17,6 +17,7 @@ describe("Create Answer", () => {
       content: "Nova Resposta",
     });
 
-    expect(answer.content).toEqual("Nova Resposta");
+    expect(answer.id).toBeTruthy();
+    expect(inMemoryAnswersRepository.items[0].id).toEqual(answer.id);
   });
 });

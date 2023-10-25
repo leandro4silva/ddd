@@ -26,8 +26,6 @@ export class AnswerQuestionUseCase {
       questionId: new UniqueEntityID(questionId),
     });
 
-    console.log(answer);
-
     await this.answersRepository.create(answer);
 
     return { answer };
