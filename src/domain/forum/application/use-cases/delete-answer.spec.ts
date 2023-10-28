@@ -22,8 +22,6 @@ describe("Delete Answer", () => {
 
     await inMemoryAnswersRepository.create(newQuestion);
 
-    console.log(inMemoryAnswersRepository.items);
-
     await sut.execute({
       answerId: "answer-1",
       authorId: "author-1",
