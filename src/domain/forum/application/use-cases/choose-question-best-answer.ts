@@ -8,7 +8,7 @@ interface ChooseQuestionBestAnswerRequest {
 
 interface ChooseQuestionBestAnswerResponse {}
 
-export class ChooseQuestionBestAnswer {
+export class ChooseQuestionBestAnswerUseCase {
   constructor(
     private questionRepository: QuestionsRespository,
     private answerRepository: AnswersRespository,
