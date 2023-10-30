@@ -1,3 +1,4 @@
+import { beforeEach } from "vitest";
 import { AnswerQuestionUseCase } from "./answer-question";
 import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository";
 
@@ -5,7 +6,7 @@ let inMemoryAnswersRepository: InMemoryAnswersRepository;
 let sut: AnswerQuestionUseCase;
 
 describe("Create Answer", () => {
-  beforeAll(() => {
+  beforeEach(() => {
     inMemoryAnswersRepository = new InMemoryAnswersRepository();
     sut = new AnswerQuestionUseCase(inMemoryAnswersRepository); // system under test
   });

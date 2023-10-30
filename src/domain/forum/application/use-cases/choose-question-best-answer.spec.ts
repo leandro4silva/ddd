@@ -4,13 +4,14 @@ import { ChooseQuestionBestAnswerUseCase } from "./choose-question-best-answer";
 import { makeQuestion } from "test/factories/make-question";
 import { makeAnswer } from "test/factories/make-answer";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { beforeEach } from "vitest";
 
 let inMemoryAnswerRepository: InMemoryAnswersRepository;
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let sut: ChooseQuestionBestAnswerUseCase;
 
 describe("Choose Question Best Awnswer Use Case", () => {
-  beforeAll(() => {
+  beforeEach(() => {
     inMemoryAnswerRepository = new InMemoryAnswersRepository();
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
     sut = new ChooseQuestionBestAnswerUseCase(
