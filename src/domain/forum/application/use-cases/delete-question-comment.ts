@@ -2,6 +2,7 @@ import { QuestionCommentsRepository } from "../repositories/question-comments-re
 
 interface DeleteQuestionCommentUseCaseRequest {
   questionCommentId: string;
+  authorId: string;
 }
 
 interface DeleteQuestionCommentUseCaseResponse {}
@@ -11,15 +12,20 @@ export class DeleteQuestionCommentUseCase {
 
   async execute({
     questionCommentId,
+    authorId,
   }: DeleteQuestionCommentUseCaseRequest): Promise<DeleteQuestionCommentUseCaseResponse> {
-    const questionComments =
+    const questionComment =
       await this.questionCommentsRepository.findById(questionCommentId);
 
-    if (!questionComments) {
+    if (!questionComment) {
       throw new Error("Question Comment not found.");
     }
 
-    await this.questionCommentsRepository.delete(questionComments);
+    if (questionComment.authorId.toString() !== authorId) {
+      throw new Error("Not allowed");
+    }
+
+    await this.questionCommentsRepository.delete(questionComment);
 
     return {};
   }
