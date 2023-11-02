@@ -27,5 +27,7 @@ describe("Delete Question Comments", () => {
     await sut.execute({
       questionCommentId: newQuestionComment.id.toString(),
     });
+
+    expect(inMemoryQuestionsCommentsRepository.items).toHaveLength(0);
   });
 });
