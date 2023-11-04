@@ -2,7 +2,8 @@ import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questio
 import { makeQuestion } from "test/factories/make-question";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { EditQuestionUseCase } from "./edit-question";
-import { beforeEach } from "vitest";
+import { beforeEach, expect } from "vitest";
+import { NotAllowedError } from "./errors/not-allowed-error";
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let sut: EditQuestionUseCase;
@@ -23,13 +24,14 @@ describe("Edit Question", () => {
 
     await inMemoryQuestionsRepository.create(newQuestion);
 
-    await sut.execute({
+    const result = await sut.execute({
       questionId: newQuestion.id.toString(),
       authorId: "author-1",
       title: "Pergunta teste",
       content: "Conteúdo teste",
     });
 
+    expect(result.isRight()).toBe(true);
     expect(inMemoryQuestionsRepository.items[0]).toMatchObject({
       title: "Pergunta teste",
       content: "Conteúdo teste",
@@ -46,13 +48,14 @@ describe("Edit Question", () => {
 
     await inMemoryQuestionsRepository.create(newQuestion);
 
-    expect(() => {
-      return sut.execute({
-        questionId: "question-1",
-        authorId: "author-2",
-        title: "Pergunta teste",
-        content: "Conteudo teste",
-      });
-    }).rejects.toBeInstanceOf(Error);
+    const result = await sut.execute({
+      questionId: "question-1",
+      authorId: "author-2",
+      title: "Pergunta teste",
+      content: "Conteudo teste",
+    });
+
+    expect(result.isLeft()).toBe(true);
+    expect(result.value).toBeInstanceOf(NotAllowedError);
   });
 });

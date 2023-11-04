@@ -36,12 +36,13 @@ describe("Fetch Question Comments", () => {
       }),
     );
 
-    const { questionComments } = await sut.execute({
+    const result = await sut.execute({
       page: 1,
       questionId: "question-1",
     });
 
-    expect(questionComments).toEqual([
+    expect(result.isRight()).toBe(true);
+    expect(result.value?.questionComments).toEqual([
       expect.objectContaining({
         questionId: new UniqueEntityID("question-1"),
         content: "Conteudo do comentario 1",
@@ -66,11 +67,12 @@ describe("Fetch Question Comments", () => {
       );
     }
 
-    const { questionComments } = await sut.execute({
+    const result = await sut.execute({
       page: 2,
       questionId: "question-1",
     });
 
-    expect(questionComments).toHaveLength(2);
+    expect(result.isRight()).toBe(true);
+    expect(result.value?.questionComments).toHaveLength(2);
   });
 });

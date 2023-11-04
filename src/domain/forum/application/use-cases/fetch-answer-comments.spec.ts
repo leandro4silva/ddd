@@ -35,12 +35,13 @@ describe("Fetch Answer Comments", () => {
       }),
     );
 
-    const { answersComments } = await sut.execute({
+    const result = await sut.execute({
       page: 1,
       answerId: "answer-1",
     });
 
-    expect(answersComments).toEqual([
+    expect(result.isRight()).toBe(true);
+    expect(result.value?.answersComments).toEqual([
       expect.objectContaining({
         answerId: new UniqueEntityID("answer-1"),
         content: "Conteudo do comentario 1",
@@ -65,11 +66,12 @@ describe("Fetch Answer Comments", () => {
       );
     }
 
-    const { answersComments } = await sut.execute({
+    const result = await sut.execute({
       page: 2,
       answerId: "answer-1",
     });
 
-    expect(answersComments).toHaveLength(2);
+    expect(result.isRight()).toBe(true);
+    expect(result.value?.answersComments).toHaveLength(2);
   });
 });
