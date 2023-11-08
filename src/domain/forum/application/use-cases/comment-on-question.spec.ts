@@ -4,15 +4,23 @@ import { CommentOnQuestionUseCase } from "./comment-on-question";
 import { InMemoryQuestionsCommentsRepository } from "test/repositories/in-memory-question-comments-repository";
 import { makeQuestion } from "test/factories/make-question";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
+import { InMemoryQuestionsAttachmentsRepository } from "test/repositories/in-memory-question-attachments-repository";
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
+let inMemoryQuestionAttachmentsRepository: InMemoryQuestionsAttachmentsRepository;
 let inMemoryQuestionsCommentsRepository: InMemoryQuestionsCommentsRepository;
 
 let sut: CommentOnQuestionUseCase;
 
 describe("Create Comment On Question", () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionsAttachmentsRepository();
+
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionAttachmentsRepository,
+    );
+
     inMemoryQuestionsCommentsRepository =
       new InMemoryQuestionsCommentsRepository();
 
