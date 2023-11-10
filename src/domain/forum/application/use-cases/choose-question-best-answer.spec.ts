@@ -7,7 +7,9 @@ import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { beforeEach, expect } from "vitest";
 import { NotAllowedError } from "./errors/not-allowed-error";
 import { InMemoryQuestionsAttachmentsRepository } from "test/repositories/in-memory-question-attachments-repository";
+import { InMemoryAnswerAttachmentsRepository } from "test/repositories/in-memory-answer-attachments-repository";
 
+let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 let inMemoryAnswerRepository: InMemoryAnswersRepository;
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionsAttachmentsRepository;
@@ -22,7 +24,12 @@ describe("Choose Question Best Awnswer Use Case", () => {
       inMemoryQuestionAttachmentsRepository,
     );
 
-    inMemoryAnswerRepository = new InMemoryAnswersRepository();
+    inMemoryAnswerAttachmentsRepository =
+      new InMemoryAnswerAttachmentsRepository();
+
+    inMemoryAnswerRepository = new InMemoryAnswersRepository(
+      inMemoryAnswerAttachmentsRepository,
+    );
 
     sut = new ChooseQuestionBestAnswerUseCase(
       inMemoryQuestionsRepository,

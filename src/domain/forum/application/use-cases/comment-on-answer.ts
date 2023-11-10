@@ -1,9 +1,9 @@
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { AnswerComments } from "../../enterprise/entities/answer-comments";
-import { AnswersRespository } from "../repositories/answers-repository";
 import { AnswerCommentsRepository } from "../repositories/answer-comments-repository";
 import { Either, left, right } from "@/core/either";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
+import { AnswersRepository } from "../repositories/answers-repository";
 
 interface CommentOnAnswerUseCaseRequest {
   authorId: string;
@@ -18,7 +18,7 @@ type CommentOnAnswerUseCaseResponse = Either<
 
 export class CommentOnAnswerUseCase {
   constructor(
-    private answerRepository: AnswersRespository,
+    private answerRepository: AnswersRepository,
     private answerCommentsRepository: AnswerCommentsRepository,
   ) {}
 
