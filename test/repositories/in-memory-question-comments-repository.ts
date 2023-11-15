@@ -1,3 +1,4 @@
+import { DomainEvents } from "@/core/events/domain-events";
 import { PaginatinParams } from "@/core/repositories/pagination-params";
 import { QuestionCommentsRepository } from "@/domain/forum/application/repositories/question-comments-repository";
 import { QuestionComments } from "@/domain/forum/enterprise/entities/question-comments";
@@ -40,5 +41,7 @@ export class InMemoryQuestionsCommentsRepository
 
   async create(questionComment: QuestionComments) {
     this.items.push(questionComment);
+
+    DomainEvents.dispatchEventsForAggregate(questionComment.id);
   }
 }
